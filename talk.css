@@ -1,0 +1,78 @@
+body{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.main{
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+
+.friendList{
+float: left;
+width: 30%;
+height: 70%;
+overflow: auto;
+}
+
+.friend{
+  height: 100px;
+  width: 100%;
+  /*border: solid 1px 0px 1px 1px rgb(214, 209, 223);*/
+  border-top: solid 1px rgb(214, 209, 223);
+  border-left: solid 1px rgb(214, 209, 223);
+  border-bottom: solid 1px rgb(214, 209, 223);
+}
+
+.icon{
+  float: left;
+  width: 30%;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.info{
+  float: right;
+  width: 70%;
+}
+
+.name{
+  text-align: left;
+  width: 100%;
+  font-size: 24px;
+}
+
+.content:before{
+  content: "\A" ;
+}
+
+.content{
+  text-align: right;
+  padding-right: 10px;
+}
+
+.talkMenu{
+  float: right;
+  width: 70%;
+  /*height: 70%;*/
+
+}
+
+.talk{
+  height: 500px;
+  border: solid 1px rgb(214, 209, 223);
+  overflow: auto;
+  /*width: 70%;*/
+}
+
+.myTalk{
+  text-align: left;
+}
+
+
+.opponentTalk{
+  text-align: right;
+}

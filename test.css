@@ -1,0 +1,104 @@
+
+body{
+  margin-left: auto;
+  margin-right: auto;
+  /*background-color: rgb(209, 239, 250);*/
+}
+
+#search{
+text-align: center;
+}
+.title{
+  font-size: 24px;
+}
+
+header{
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0px;
+  font-size: 24px;
+  z-index: 999;
+}
+li.list-group-item{
+  display: inline-block;
+}
+li.img-top{
+border: none;
+}
+header > a{
+  padding-right: 20px;
+}
+
+main{
+  margin-top: 100px;
+}
+
+#search{
+  margin-top: 80px;
+}
+
+.list{
+  display: flex;
+  width: 70%;
+  height:300px;
+  margin-left: auto;
+  margin-right: auto;
+  /*border-radius: 20px;*/
+  /*padding-top: 20px;*/
+  /*margin-top: 20px;*/
+  /*background-color: rgb(223, 220, 221);*/
+}
+
+.list > .list-content > span{
+  content: "\A" ;
+}
+
+.list > .list-icon{
+  float: left;
+  width: 20%;
+  padding-left: 10px;
+}
+
+.list > .list-content{
+  width: 80%;
+  padding-left: 30px;
+  float: right;
+  /*text-align: left;*/
+}
+.list > .list-content > span{
+  /*text-align: left;*/
+}
+.list > .list-content > .tag{
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 30px;
+}
+
+.list > .list-count{
+margin-right: 200px;
+clear: both;
+}
+.list > .list-count > span{
+  position: absolute;
+  /*text-align: right;*/
+  bottom: 0;
+  width: 20%;
+  /*padding-right: 20px;*/
+  font-size: 20px;
+}
+.page{
+text-align: center;
+}
+.num{
+  display: inline-block;
+}
+
+.list-group-item + .list-group-item{
+  /*border-top: none;*/
+}
+
+footer{
+  background-color: rgb(212, 242, 190);
+  text-align: center;
+}

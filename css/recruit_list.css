@@ -38,6 +38,16 @@ main{
   margin-top: 80px;
 }
 
+.searchBox{
+  list-style: none;
+
+}
+
+.searchBox > li{
+  /*display: inline-block;*/
+  /*width: 25%;*/
+}
+
 .list{
   display: flex;
   width: 70%;
@@ -88,7 +98,7 @@ clear: both;
   font-size: 20px;
 }
 .page{
-text-align: center;
+  text-align: center;
 }
 .num{
   display: inline-block;

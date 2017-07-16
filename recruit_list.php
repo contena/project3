@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include "recruit_list_controll.php";
+  include "recruit_list_func.php";
  ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -31,6 +31,7 @@
         <li class="list-group-item"><a href="*">プロフィール</a></li>
         <li class="list-group-item"><a href="recruit_start.html">募集する</a></li>
         <li class="list-group-item"><a href="recruit_list.php">検索する</a></li>
+        <li class="list-group-item"><a href="talk.php">トークする</a></li>
         <li class="list-group-item">  <form action="logout.php" method="post"><input type="submit" value="ログアウト" /></form></li></ul>
     </nav>
   </header>

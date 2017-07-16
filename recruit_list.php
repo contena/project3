@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  include "recruit_list_controll.php";
+ ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -25,9 +29,9 @@
       <ul class="list-group">
         <li class="list-group-item img-top"><img src="pitalink.gif"  height="50" alt=""></li>
         <li class="list-group-item"><a href="*">プロフィール</a></li>
-        <li class="list-group-item"><a href="*">募集する</a></li>
-        <li class="list-group-item"><a href="*">検索する</a></li>
-      </ul>
+        <li class="list-group-item"><a href="recruit_start.html">募集する</a></li>
+        <li class="list-group-item"><a href="recruit_list.php">検索する</a></li>
+        <li class="list-group-item">  <form action="logout.php" method="post"><input type="submit" value="ログアウト" /></form></li></ul>
     </nav>
   </header>
 	<main role="main">
@@ -47,26 +51,36 @@
       </form>
     </div>
     <div class="list-group">
-      <form>
-        <div class="list-group-item list">
-          <div class="list-icon">
-            <img src="user_icon_default.jpg" width="100" height="150">
-          </div>
-          <div class="list-content">
-            <span class="title">
-              ここにタイトルを入力してください
-            </span>
-            <div class="content">
-                ここに内容を入力してください
-            </div>
-            <span class="tag"><img src="tag.png">HTML</span>
-          </div>
-          <div class="list-count">
-            <span>応募人数：二人</span>
-          </div>
-        </div>
-    </form>
-      <div class="list-group-item list">
+      <?php
+        $recruit_list = recruitListGet();
+        foreach ($recruit_list as $r) {
+          echo '
+            <form action="recruit_join.php" method="post">
+              <div class="list-group-item list">
+                <div class="list-icon">
+                  <img src="user_icon_default.jpg" width="100" height="150">
+                </div>
+                <div class="list-content">
+                  <span class="title">
+                  '.$r["m_title"].'
+                  </span>
+                  <div class="content">
+                  '.$r["m_content"].'
+                  </div>
+                  <span class="tag"><img src="tag.png">HTML</span>
+                  <span class="count">'.$r["m_count"].'</span>
+                  <div class="send">
+                    <button type="submit" name="button">応募する</button>
+                  </div>
+                  <input type="hidden" name="m_id" value="'.$r["m_id"].'">
+                </div>
+              </div>
+            </form>
+          ';
+        }
+       ?>
+
+      <!-- <div class="list-group-item list">
         <div class="list-icon">
           <img src="user_icon_default.jpg" width="100" height="150">
         </div>
@@ -83,24 +97,8 @@
             <button type="submit" name="button">応募する</button>
           </div>
         </div>
-      </div>
-      <div class="list-group-item list">
-        <div class="list-icon">
-          <img src="user_icon_default.jpg" width="100" height="150">
-        </div>
-        <div class="list-content">
-          <span class="title">
-            ここにタイトルを入力してください
-          </span>
-          <div class="content">
-              ここに内容を入力してください
-          </div>
-          <span class="tag"><img src="tag.png">HTML</span>
-        </div>
-        <div class="list-count">
-          <span>応募人数：二人</span>
-        </div>
-      </div>
+      </div> -->
+
     </div>
     <div class="move page">
       <ul class="pagination page">

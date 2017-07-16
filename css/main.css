@@ -1,0 +1,49 @@
+body{
+  background:radial-gradient(rgba(155, 205, 245, 0.87),rgb(67, 130, 205)) ;
+margin: 0;
+
+}
+header >div> img{
+  max-width: 150px;
+  max-height: 100px;
+
+}
+
+header{
+
+  background-color:black;
+
+}
+div > span.icon-user{
+  top:10px;
+  right: 130px;
+
+position: fixed;
+}
+div > span.icon-bubble{
+  top:10px;
+  right: 70px;
+
+position: fixed;}
+div > span.icon-zoom-in{
+  top:10px;
+  right: 10px;
+
+position: fixed;
+}
+#searchbox{
+  font-size: 25px;
+  text-align: center;
+  margin-top: 50px;
+   margin-left: -209px;
+   width: 400px;
+   height: 560px;
+   position: relative;
+   top: 50%;
+   left: 50%;
+   background-color: white;
+   padding-top: 10px;
+     border-radius:5px;
+border:1px solid black;
+background-color: #EEEEEE;
+}

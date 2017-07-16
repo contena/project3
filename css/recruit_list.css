@@ -51,7 +51,7 @@ main{
 .list{
   display: flex;
   width: 70%;
-  height:300px;
+  height:220px;
   margin-left: auto;
   margin-right: auto;
   /*border-radius: 20px;*/
@@ -60,8 +60,12 @@ main{
   /*background-color: rgb(223, 220, 221);*/
 }
 
-.list > .list-content > span{
+/*.list > .list-content > span{
   content: "\A" ;
+}*/
+
+.content{
+  height: 80px;
 }
 
 .list > .list-icon{
@@ -80,23 +84,35 @@ main{
   /*text-align: left;*/
 }
 .list > .list-content > .tag{
-  position: absolute;
-  bottom: 0;
-  padding-bottom: 30px;
+  /*position: absolute;
+  bottom: 0;*/
+  /*padding-bottom: 30px;*/
+}
+
+
+.count:before{
+  content: "\A" ;
+  white-space: pre;
+}
+
+.send{
+  text-align: right;
+}
+
+/*
+.send:before{
+  content: "\A" ;
+  white-space: pre;
+}*/
+
+.list > .list-content > input{
+  text-align: right;
 }
 
 .list > .list-count{
-margin-right: 200px;
-clear: both;
+  margin-right: 200px;
 }
-.list > .list-count > span{
-  position: absolute;
-  /*text-align: right;*/
-  bottom: 0;
-  width: 20%;
-  /*padding-right: 20px;*/
-  font-size: 20px;
-}
+
 .page{
   text-align: center;
 }

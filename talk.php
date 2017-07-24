@@ -39,7 +39,7 @@ require "talk_func.php";
             echo '
               <div class="friend">
                   <div class="icon">
-                      <img src="Ci44F-OUUAEAt1Q.jpg" width="60" height="80">
+                      <img src="user_icon_default.jpg" width="60" height="80">
                   </div>
                   <a href="talk.php?t_id='.$talk_list[$i]["t_id"].'">
                   <div class="info">
@@ -87,7 +87,6 @@ require "talk_func.php";
         if($talk_contents === false){
           $talk_contents = null;
         }
-        echo var_dump($talk_contents);
         if(isset($talk_contents)){
           foreach ($talk_contents as $r) {
             if($r["t_host_id"] == $_SESSION["a_id"]){

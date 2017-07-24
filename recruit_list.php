@@ -69,7 +69,7 @@
                   '.$r["m_content"].'
                   </div>
                   <span class="tag"><img src="tag.png">HTML</span>
-                  <span class="count">'.$r["m_count"].'</span>
+                  <span class="count">応募人数：'.$r["m_count"].'</span>
                   <div class="send">
                     <button type="submit" name="button">応募する</button>
                   </div>

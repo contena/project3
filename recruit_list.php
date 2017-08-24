@@ -38,7 +38,7 @@
 	<main role="main">
     <hr>
     <div id="search" class="form-group">
-      <form action="*" method="*" class="form-inline">
+      <form action="recruit_list.php" method="GET" class="form-inline">
           <select class="form-control" name="how" id="how">
             <option value="タグ">タグ</option>
             <option value="名前">名前</option>
@@ -53,7 +53,7 @@
     </div>
     <div class="list-group">
       <?php
-        $recruit_list = recruitListGet();
+        $recruit_list = recruitListGet($_GET["word"]);
         foreach ($recruit_list as $r) {
           echo '
             <form action="recruit_join.php" method="post">
@@ -69,7 +69,7 @@
                   '.$r["m_content"].'
                   </div>
                   <span class="tag"><img src="tag.png">HTML</span>
-                  <span class="count">応募人数：'.$r["m_count"].'</span>
+                  <span class="count">'.$r["m_count"].'</span>
                   <div class="send">
                     <button type="submit" name="button">応募する</button>
                   </div>

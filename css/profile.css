@@ -1,0 +1,19 @@
+main{
+  margin-top: 100px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 100px;
+}
+
+.nav-tags{
+  width:10%;
+  float: left;
+}
+.tab-content{
+  width: 90%;
+  float: right;
+}
+footer{
+  
+}

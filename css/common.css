@@ -12,6 +12,7 @@ header{
   padding-bottom: 70px;
   background-color: rgb(90, 91, 111);
   font: white;
+  z-index: 999;
 }
 
 li.list-group-item{
@@ -27,8 +28,4 @@ header > a{
 footer{
   background-color: rgb(212, 242, 190);
   text-align: center;
-  height: 50px;
-  bottom: 0;
-  position: fixed;
-  width: 100%;
 }

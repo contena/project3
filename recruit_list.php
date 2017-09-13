@@ -69,7 +69,12 @@
                   <div class="content">
                   '.$r["m_content"].'
                   </div>
-                  <span class="tag"><img src="tag.png">HTML</span>
+                  <span class="tag">';
+                  foreach ($tag as $t) {
+                    echo '<img src="tag.png">'.$t["skill"].'';
+                  }
+                  // <img src="tag.png">HTML
+                echo '</span>
                   <span class="count">'.$r["m_count"].'</span>
                   <div class="send">
                     <button type="submit" name="button">応募する</button>

@@ -55,6 +55,7 @@
       <?php
         $recruit_list = recruitListGet($_GET["word"]);
         foreach ($recruit_list as $r) {
+          $tag = getTag($r['m_id']);
           echo '
             <form action="recruit_join.php" method="post">
               <div class="list-group-item list">

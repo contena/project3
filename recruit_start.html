@@ -40,27 +40,27 @@
     <div class="recruit">
         <h2>プロジェクト募集</h2>
       <!-- <form action="recruit_start.php" method="post"> -->
-        <div class="form-group">
+        <div class="form-group title">
           <div class="row">
             <label for="title" class="control-label col-xs-1">タイトル</label>
               <div class="col-xs-3">
-                <input type="text" name="title" id="title" placeholder="タイトル" class="form-control input-lg">
+                <input type="text" name="title" id="title" placeholder="タイトル" class="form-control input-lg inputTitle">
               </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group content">
           <div class="row">
             <label for="content" class="control-label col-xs-1">内容</label>
             <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
             <div class="col-xs-5">
-              <textarea name="content" id="content" placeholder="募集内容の詳細" class="form-control"></textarea>
+              <textarea name="content" id="content" placeholder="募集内容の詳細" class="form-control inputContent"></textarea>
             </div>
             <script>
               // var simplemde = new SimpleMDE();
             </script>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group tag">
           <div class="row">
             <label for="tagList" class="control-label col-xs-1">技能タグ</label>
               <div class="col-xs-3">
@@ -74,7 +74,7 @@
             </div>
         </div>
         <ul class="button">
-          <li><button type="button" class="btn btn-default btn-lg" onclick="start()">募集する</button></li>
+          <li><button type="button" class="btn btn-default btn-lg" onclick="checkText()">募集する</button></li>
           <li><button class="btn btn-default sbm">前のページに戻る</button></li>
         </ul>
       <!-- </form> -->

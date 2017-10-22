@@ -42,3 +42,7 @@ header > a{
 .form-control{
   width: 40%;
 }
+
+ul{
+  list-style: none;
+}

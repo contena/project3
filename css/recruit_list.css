@@ -31,7 +31,7 @@ header > a{
 }
 
 main{
-  margin-top: 100px;
+  margin-top: 66px;
 }
 
 #search{
@@ -99,6 +99,13 @@ main{
   text-align: right;
 }
 
+/*.tag{
+  padding-left: 10px;
+  width: 100%;
+}*/
+/*.tag > a + .tag > a{
+  padding-left: 10px;
+}*/
 /*
 .send:before{
   content: "\A" ;

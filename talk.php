@@ -1,5 +1,9 @@
 <?php
 session_start();
+if($_SESSION["a_id"] == null){
+  header("Location:title.html");
+}
+
 require "talk_func.php";
  ?>
 <!DOCTYPE html>
@@ -21,7 +25,7 @@ require "talk_func.php";
       <ul class="list-group">
         <li class="list-group-item img-top"><img src="pitalink.png"  height="50" alt=""></li>
         <li class="list-group-item"><a href="*">プロフィール</a></li>
-        <li class="list-group-item"><a href="recruit_start.html">募集する</a></li>
+        <li class="list-group-item"><a href="recruit_start.php">募集する</a></li>
         <li class="list-group-item"><a href="recruit_list.php">検索する</a></li>
         <li class="list-group-item"><a href="talk.php">トークする</a></li>
         <li class="list-group-item">  <form action="logout.php" method="post"><input type="submit" value="ログアウト" /></form></li></ul>

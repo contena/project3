@@ -8,7 +8,7 @@ function start(){
   });
   $.ajax({
     type:"post",
-    url: "recruit_start.php",
+    url: "recruit_starting.php",
     data:{
         'title':title,
         'content':content,
@@ -40,12 +40,13 @@ function checkText(){
   if(titleBool && contentBool){
     start();
   }
-
 }
 
 function tagControll(){
   var tag = $(".addTag").val();
-  console.log(tag);
-  $(".tags > li").prepend('<ul class="added"><li class="tag">'+ tag +'</li><button class="deleteButton">削除</button></ul>');
-  $(".addTag").val("");
+  if(tag !== ""){
+    console.log(tag);
+    $(".tags > li").prepend('<ul class="added"><li class="tag">'+ tag +'</li><button class="deleteButton">削除</button></ul>');
+    $(".addTag").val("");
+  }
 }

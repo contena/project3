@@ -23,7 +23,7 @@ function getTalkList(){
       $myid = $whichmyid["a_app_id"];
     }else{
       $myid = $whichmyid["a_host_id"];
-  }
+    }
     $data = $conn->query('select t_id,(select m_title from matching m where m.m_id = t.m_id) as m_title,
     (select a_name from account where a_id = '.$myid.') as a_name  from talkroom t  where t_id = '.$talk[$i]["t_id"]);
     //トークID、マッチングタイトル、相手の名前とかを取得

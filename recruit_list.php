@@ -1,5 +1,9 @@
 <?php
   session_start();
+if($_SESSION["a_id"] == null){
+  header("Location:title.html");
+}
+
   include "recruit_list_func.php";
  ?>
 <!DOCTYPE html>
@@ -7,32 +11,42 @@
 <head>
   <meta charset="UTF-8">
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-  <title>Document</title>
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.1.0/css/drawer.min.css"> -->
+  <title>募集一覧</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/recruit_list.css">
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/non-responsive.css">
 <script src="./JS/jquery-2.1.3.js"></script>
 <script src="./JS/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-<!-- <script src="//code.jquery.com/jquery-2.11.2.min.js"></script> -->
-
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.1.0/js/drawer.min.js"></script>
-</head>
-<!-- <body class="drawer drawer--left"> -->
+<script>
+$(function(){
+  $(document).on("click",".sendButton",function(){
+    var m_id = $(this).parent().parent().find("input:hidden").val();
+    console.log(m_id);
+    console.log("haa");
+    $.ajax({
+      type : 'post',
+      url : "recruit_join.php",
+      data :{ 'm_id' : m_id },
+      success:function(html){
+        alert(html);
+        location.reload(true);
+      }
+    });
+  });
+});
+</script>
 </head>
 <body>
   <header>
     <nav>
       <ul class="list-group">
         <li class="list-group-item img-top"><img src="pitalink.gif"  height="50" alt=""></li>
-        <li class="list-group-item"><a href="*">プロフィール</a></li>
-        <li class="list-group-item"><a href="recruit_start.html">募集する</a></li>
+        <li class="list-group-item"><a href="mypage.php">プロフィール</a></li>
+        <li class="list-group-item"><a href="recruit_start.php">募集する</a></li>
         <li class="list-group-item"><a href="recruit_list.php">検索する</a></li>
         <li class="list-group-item"><a href="talk.php">トークする</a></li>
-        <li class="list-group-item">  <form action="logout.php" method="post"><input type="submit" value="ログアウト" /></form></li></ul>
+        <li class="list-group-item" id="submitbutton"> <form action="logout.php" method="post"><input type="submit" value="ログアウト" /></form></li></ul>
     </nav>
   </header>
 	<main role="main">
@@ -40,81 +54,83 @@
     <div id="search" class="form-group">
       <form action="recruit_list.php" method="GET" class="form-inline">
           <select class="form-control" name="how" id="how">
-            <option value="タグ">タグ</option>
-            <option value="名前">名前</option>
+            <option value="tag">タグ</option>
+            <option value="content">内容</option>
           </select>
           <select class="form-control" name="sort" id="sort">
-            <option value="応募数">応募数</option>
-          <option value="日付">日付</option>
+            <option value="count">応募数</option>
+            <option value="id">募集順</option>
           </select>
-          <input class="form-control" type="text" name="word" value="a">
+          <input class="form-control" type="text" name="word" value="">
           <input class="btn btn-default" type="submit" value="検索">
       </form>
     </div>
     <div class="list-group">
       <?php
-        $recruit_list = recruitListGet($_GET["word"]);
+        $_GET["word"] = (isset($_GET["word"])) ? $_GET["word"] : "";
+        $_GET["how"] = (isset($_GET["how"])) ? $_GET["how"] : "";
+        $_GET["sort"] = (isset($_GET["sort"])) ? $_GET["sort"] : "";
+        $_GET["page"] = (isset($_GET["page"])) ? $_GET["page"] : 1;
+
+        $recruit_list = recruitListGet();
         foreach ($recruit_list as $r) {
           $tag = getTag($r['m_id']);
           echo '
-            <form action="recruit_join.php" method="post">
-              <div class="list-group-item list">
-                <div class="list-icon">
-                  <img src="user_icon_default.jpg" width="100" height="150">
-                </div>
-                <div class="list-content">
-                  <span class="title">
-                  '.$r["m_title"].'
-                  </span>
-                  <div class="content">
-                  '.$r["m_content"].'
-                  </div>
-                  <span class="tag">';
-                  foreach ($tag as $t) {
-                    echo '<img src="tag.png">'.$t["skill"].'';
-                  }
-                  // <img src="tag.png">HTML
-                echo '</span>
-                  <span class="count">'.$r["m_count"].'</span>
-                  <div class="send">
-                    <button type="submit" name="button">応募する</button>
-                  </div>
-                  <input type="hidden" name="m_id" value="'.$r["m_id"].'">
-                </div>
+            <div class="list-group-item list">
+              <div class="list-icon">
+                <img src="user_icon_default.jpg" width="100" height="150">
               </div>
-            </form>
+              <div class="list-content">
+                <span class="title">
+                  '.$r["m_title"].'
+                </span>
+                <div class="content">
+                  '.htmlspecialchars_decode($r["m_content"]).'
+                </div>
+                <span class="tag">';
+                  foreach ($tag as $t) {
+                    echo '<a href="recruit_list.php?how=tag&sort=count&word='.$t["skill"].'"><img src="tag.png">'.$t["skill"].'</a>';
+                  }
+              echo '</span>
+                  <span class="count">応募者数：'.$r["m_count"].'</span>
+                <div class="send">
+                  <button type="button" class="sendButton" name="button">応募する</button>
+                </div>
+                  <input type="hidden" class="m_id" name="m_id" value="'.$r["m_id"].'">
+              </div>
+            </div>
           ';
         }
        ?>
-
-      <!-- <div class="list-group-item list">
-        <div class="list-icon">
-          <img src="user_icon_default.jpg" width="100" height="150">
-        </div>
-        <div class="list-content">
-          <span class="title">
-            ここにタイトルを入力してください
-          </span>
-          <div class="content">
-              ここに内容を入力してください
-          </div>
-          <span class="tag"><img src="tag.png">HTML</span>
-          <span class="count">応募人数：二人</span>
-          <div class="send">
-            <button type="submit" name="button">応募する</button>
-          </div>
-        </div>
-      </div> -->
-
     </div>
     <div class="move page">
       <ul class="pagination page">
-        <li class="disabled"><a href="">&laquo;</a></li>
-        <li class="active"><a href="*">1</a></li>
-        <li><a href="*">2</a></li>
-        <li><a href="*">3</a></li>
-        <li><a href="*">4</a></li>
-        <li><a href="*">5</a></li>
+        <?php
+          echo '<li class=""><a href="recruit_list.php?how='.$_GET["how"].'&sort='.$_GET["sort"].'&word='.$_GET["word"].'&page=1">&laquo;</a></li>';
+
+          $pageNum = getPageNum();//ページの件数を取得
+          $pageNum = $pageNum % 10 == 0 ? $pageNum -10 : $pageNum;//十で割り切れる数だった場合は無理やり数合わせ
+          $pageNum = $pageNum == 0 ? $pageNum + 1 : $pageNum;//0だったら1
+          $pageNum = floor($pageNum / 10);
+          $pageNum = $pageNum == 0 ? $pageNum+1 : $pageNum;
+          //前後5個ぐらいに制限したい
+          $start = 1;
+          if($_GET["page"] >= 3){
+            $start = $_GET["page"] - 2;
+          }
+          //$_GET["page"] = 4 ならstartが2、endが6もしくはページ終了までが理想
+          $end = $start + 4;
+          $lastPageNum = $pageNum > $end ? $end : $pageNum;//$endの値のほうが小さければ、$endを代入
+
+          for($i = $start; $i <= $lastPageNum;$i++){
+            if($i == $_GET["page"]){
+              echo '<li class = "active disabled"><a>'.$i.'</a></li>';
+            }else{
+              echo '<li><a href="recruit_list.php?how='.$_GET["how"].'&sort='.$_GET["sort"].'&word='.$_GET["word"].'&page='.$i.'">'.$i.'</a></li>';
+            }
+          }
+          echo '<li class=""><a href="recruit_list.php?how='.$_GET["how"].'&sort='.$_GET["sort"].'&word='.$_GET["word"].'&page='.$pageNum.'">&raquo;</a></li>';
+         ?>
       </ul>
     </div>
 	</main>

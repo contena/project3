@@ -8,7 +8,7 @@ function start(){
   });
   $.ajax({
     type:"post",
-    url: "recruit_start.php",
+    url: "recruit_starting.php",
     data:{
         'title':title,
         'content':content,
@@ -16,18 +16,20 @@ function start(){
       },
     success:function(html){
       console.log("send");
+      alert("募集を開始しました");
+      location.reload(true);
     }
   });
   console.log("すたーと");
 }
 
 function checkText(){
+  $(".send").prop("disabled",true);
   $(".viewError").remove();
   var title = $("#title").val();
   var content = $('#content').val();
   var titleBool = true;
   var contentBool = true;
-  // var tagBool = true;
   if(title == ""){
     titleBool = false;
     $(".inputTitle").after('<span class="viewError">空白です</span>');
@@ -40,12 +42,24 @@ function checkText(){
   if(titleBool && contentBool){
     start();
   }
-
+  $(".send").prop("disabled",false);
 }
 
 function tagControll(){
+  $(".viewError").remove();
   var tag = $(".addTag").val();
-  console.log(tag);
-  $(".tags > li").prepend('<ul class="added"><li class="tag">'+ tag +'</li><button class="deleteButton">削除</button></ul>');
-  $(".addTag").val("");
+  var tagCount = $(".tag").length;
+  var countCheck = true;
+  if(tagCount > 2){
+    $(".addTag").after('<span class="viewError">登録できるタグは3つまでです</span>');
+    countCheck = false;
+  }
+
+
+  if(tag !== "" && countCheck){
+    console.log(tag);
+    $(".tags > li").prepend('<ul class="added"><li class="tag">'+ tag +'</li><button class="deleteButton">削除</button></ul>');
+    $(".addTag").val("");
+    $(".addTag").focus();
+  }
 }

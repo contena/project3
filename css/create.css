@@ -37,8 +37,16 @@ text-align: center;
 
 }
 body{
-  background-color:#3498db ;
   margin: 0;
+  background:
+     radial-gradient(#ffffff, rgba(255,255,255,.10) 20px, transparent 100px),
+     radial-gradient(#99cccc, rgba(255,255,255,.1) 15px, transparent 100px),
+     radial-gradient(#99ccff, rgba(255,255,255,.2) 5px, transparent 100px),
+     radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 1px, transparent 30px);
+   background-color: #7093b7;
+   background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+   background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+   animation: anime 500s linear infinite;
 }
 header >a> img{
   max-width: 150px;
@@ -49,6 +57,11 @@ header{
   background-color: black;
 
 }
+h1{
+  text-shadow:black 1.5px 1.5px 1.5px,black 1.5px 1.5px 1.5px,
+              black 1.5px 1.5px 1.5px,black 1.5px 1.5px 1.5px;
+}
+
 
 .individual-bubble {
   margin-top: 100px;
@@ -78,4 +91,12 @@ z-index: 1;
   	box-sizing: border-box;
   	-webkit-transition: all .5s;
   	transition: all .5s;
+  }
+  @keyframes anime {
+   0% {
+     background-position: 2500px 10000%;
+   }
+   100% {
+     background-position: 0% 0%;
+   }
   }

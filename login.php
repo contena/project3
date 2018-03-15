@@ -3,11 +3,11 @@
 if(empty(session_id())){
 	session_start();
 }
+include "connect.php";
 $login=isset($_POST['loginid']) ? $_POST['loginid'] : '';
 $password=isset($_POST['password']) ? $_POST['password'] : '';
 
-$conn = new PDO(
-	"mysql:host=localhost;dbname=pitalinkdb;charset=utf8","root","");
+$conn = getConnection();
 
 $result=$conn->prepare("SELECT * FROM account WHERE a_login=:login");
 $result->execute(array(':login'=>$login));

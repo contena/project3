@@ -6,8 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Create</title>
   <link rel="stylesheet" type="text/css" media="all" href="css/create.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="javascript/create.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+  <script src="./JS/jquery-2.1.3.js"></script>
+  <!-- <script src="javascript/create.js"></script> -->
 </head>
 <body>
   <header>
@@ -15,18 +16,64 @@
       <img src="images/pitalink.png">
     </a>
   </header>
+<script>
+$(function(){
+  $(document).on("click","#create",function(){
+    var name = $(".name").val();
+    var mail = $(".mail").val();
+    var id = $(".id").val();
+    var pass = $(".pass").val();
 
+    var nameCheck = true;
+    var mailCheck = true;
+    var idCheck = true;
+    var passCheck = true;
+
+    name == "" ? nameCheck = false : name.length > 20 ? nameCheck = false : nameCheck ;
+    mail == "" ? mailCheck = false : mail.length > 50 ? mailCheck = false : mailCheck;
+    id == "" ? idCheck = false : id.length > 20 ? idCheck = false : idCheck;
+    pass == "" ? passCheck = false :pass.length > 20 ? nameCheck = false : passCheck ;
+
+    if(nameCheck && mailCheck && idCheck &&  passCheck){
+      $.ajax({
+        type:"post",
+        url:"create.php",
+        data:{
+          'name': name,
+          'address': mail,
+          'loginid': id,
+          'password' : pass,
+        },
+        success:function(html){
+		var result ="登録完了しました。";
+		if(html===result){
+			alert(html);
+			window.location.href = 'title.html';
+		}else{
+			alert(html);
+			window.location.href = 'Create.html';
+		}
+		}
+      });
+    }else if(!nameCheck||!mailCheck||!idCheck||!passCheck){
+		alert("空文字または文字数が制限を超えています");
+		window.location.href = 'Create.html';
+	}
+  })
+});
+</script>
   <div id="form">
   <div id="welcome" class="bubbles">
     <h1>Pitalinkをはじめましょう</h1>
   </div>
   <div id="createform">
-    <form method="POST" id="crearedform" action="create.php">
-      <p>name:<br><input type="text" name="name" placeholder="名前"></p>
-      <p>mailaddress:<br><input type="text" name="address" placeholder="メールアドレス"></p>
-      <p>loginID:<br><input type="text" name="loginid" placeholder="ログインID"></p>
-      <p>password:<br><input type="password" name="password" placeholder="パスワード"></p>
-      <input type="submit" id="create" value="New Create">
+    <form method="POST" id="crearedform" action="">
+      <p>name:<br><input type="text" class="name" name="name" placeholder="名前"></p>
+      <p>mailaddress:<br><input type="text" class="mail" name="address" placeholder="メールアドレス"></p>
+      <p>loginID:<br><input type="text" class="id" name="loginid" placeholder="ログインID"></p>
+      <p>password:<br><input type="password" class="pass" name="password" placeholder="パスワード"></p>
+      <!-- <input type="submit" id="create" value="New Create"> -->
+      <button type="button" id ="create">New Create</button>
     </form>
   </div>
   </div>

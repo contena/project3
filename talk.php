@@ -1,5 +1,9 @@
 <?php
 session_start();
+if($_SESSION["a_id"] == null){
+  header("Location:title.html");
+}
+
 require "talk_func.php";
  ?>
 <!DOCTYPE html>
@@ -19,12 +23,12 @@ require "talk_func.php";
   <header>
     <nav>
       <ul class="list-group">
-        <li class="list-group-item img-top"><img src="pitalink.png"  height="50" alt=""></li>
-        <li class="list-group-item"><a href="*">プロフィール</a></li>
-        <li class="list-group-item"><a href="recruit_start.html">募集する</a></li>
+        <li class="list-group-item img-top"><img src="pitalink.gif"  height="50" alt=""></li>
+        <li class="list-group-item"><a href="mypage.php">プロフィール</a></li>
+        <li class="list-group-item"><a href="recruit_start.php">募集する</a></li>
         <li class="list-group-item"><a href="recruit_list.php">検索する</a></li>
         <li class="list-group-item"><a href="talk.php">トークする</a></li>
-        <li class="list-group-item">  <form action="logout.php" method="post"><input type="submit" value="ログアウト" /></form></li></ul>
+        <li class="list-group-item" id="submitbutton"> <form action="logout.php" method="post"><input type="submit" value="ログアウト" /></form></li>
       </ul>
     </nav>
   </header>
@@ -39,7 +43,7 @@ require "talk_func.php";
             echo '
               <div class="friend">
                   <div class="icon">
-                      <img src="Ci44F-OUUAEAt1Q.jpg" width="60" height="80">
+                      <img src="./p_icon/'.$talk_list[$i]["p_icon"].'" width="60" height="80">
                   </div>
                   <a href="talk.php?t_id='.$talk_list[$i]["t_id"].'">
                   <div class="info">
@@ -51,33 +55,7 @@ require "talk_func.php";
             ';
         }
        ?>
-      <!-- <div class="friend">
-          <div class="icon">
-              <img src="Ci44F-OUUAEAt1Q.jpg" width="60" height="80">
-          </div>
-          <div class="info">
-            <div class="name">てすと</div>
-            <div class="content">おはよう</div>
-          </div>
-      </div> -->
-      <!-- <div class="friend">
-          <div class="icon">
-              <img src="Ci44F-OUUAEAt1Q.jpg" width="60" height="80">
-          </div>
-          <div class="info">
-            <div class="name">てすと</div>
-            <div class="content">おはよう</div>
-          </div>
-      </div>
-      <div class="friend">
-          <div class="icon">
-              <img src="Ci44F-OUUAEAt1Q.jpg" width="60" height="80">
-          </div>
-          <div class="info">
-            <div class="name">てすと</div>
-            <div class="content">おはよう</div>
-          </div>
-      </div> -->
+
     </div>
     <div class="talkMenu">
         <div class="talk">
@@ -87,64 +65,40 @@ require "talk_func.php";
         if($talk_contents === false){
           $talk_contents = null;
         }
-        //echo var_dump($talk_contents);
         if(isset($talk_contents)){
           foreach ($talk_contents as $r) {
             if($r["t_host_id"] == $_SESSION["a_id"]){
               echo
               '<div class="myTalk">
-                '.$r["t_content"].'
+                <span class="txt">'.$r["t_content"].'</span>
               </div>';
             }else{
               echo '
               <div class="opponentTalk">
-                '.$r["t_content"].'
+                <span class="txt">'.$r["t_content"].'</span>
               </div>
               ';
             }
           }
         }else{
-          // echo '
-          // <div class="talk">
-          //
-          // </div>
-          // <div class="sendForm">
-          //   <form action="talk_controller.php" method="post">
-          //     <input type="text" name="content">
-          //     <input type="submit" value="送信">
-          //     <input type="hidden" name="t_id" value="'.$_GET["t_id"].'">
-          //   </form>
-          // </div>';
+
         }
       }
 
        ?>
-      <!-- <h2>***のトーク</h2>
-      <div class="talk">
-        <div class="myTalk">
-          aaa
-        </div>
-        <div class="opponentTalk">
-          bbb
-        </div>
-      </div>
-      <div class="sendForm">
-        <form action="talk_controller.php" method="post">
-          <input type="text" name="talk">
-          <input type="submit" value="送信">
-          <input type="hidden" name="t_id" value="*">
-        </form>
-      </div> -->
 
-      </div>
-      <div class="sendForm">
-        <form action="talk_controller.php" method="post">
-          <input type="text" name="content">
-          <input type="submit" value="送信">
-          <input type="hidden" name="t_id" value="<?php echo $_GET["t_id"]; ?>">
-        </form>
-      </div>
     </div>
+    <?php
+    if(isset($_GET["t_id"])){
+      echo '<div class="sendForm">
+        <form action="talk_controller.php" method="post">
+          <textarea name="content"></textarea>
+          <input type="submit" value="送信">
+          <input type="hidden" name="t_id" value="'.$_GET["t_id"].'">
+        </form>
+      </div>';
+        }
+      ?>
   </div>
   <!-- <footer>
     プロ演3
